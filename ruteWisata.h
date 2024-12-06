@@ -6,18 +6,19 @@
 
 using namespace std;
 
-typedef string NamaWisata;
-
 struct ruteWisata{
-    NamaWisata nama;
+   string nama;
     string lokasi;
     double jarak;
 };
 
 
-
-
-
+double hitungJarakTotal(ruteWisata rute[], int n);
+double hitungWaktuPerjalanan(double totalJarak, double kecepatan);
+bool validasiInput(double jarak);
+void cariTempatWisata(ruteWisata rute[], int n, string nama);
+double estimasiWakti(double jarak, double kecepatan);
+void rekomendasiTempatWisata(ruteWisata rute[], int n);
 
 
 #endif // RUTEWISATA_H_INCLUDED
