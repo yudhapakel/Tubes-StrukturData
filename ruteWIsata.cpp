@@ -91,11 +91,12 @@ void hitungJarakTerpendek(double graph[MAX_TEMPAT], int n, int start, int end) {
     cout << "jarak terpendek: " << start << "ke" << end << "adalah" << jarak[end] << "km";
     cout << "melalui jalur: ";
     int crawl = end;
-    while (/* condition */)
+    while (crawl != -1)
     {
-        /* code */
+        cout << crawl << (crawl == start ? "" : "<-");
+        crawl = prev[crawl];
     }
-
+    cout << endl;
     // test
     
 
