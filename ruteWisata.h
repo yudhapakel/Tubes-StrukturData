@@ -11,10 +11,9 @@ using namespace std;
 
 const int MAX_TEMPAT = 100;
 
-typedef namaWisata;
 
 struct ruteWisata{
-   namaWisata nama;
+    string nama;
     string lokasi;
     double jarak;
 };
