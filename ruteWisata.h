@@ -22,11 +22,11 @@ struct ruteWisata{
 double hitungJarakTotal(ruteWisata rute[], int n);
 double hitungWaktuPerjalanan(double totalJarak, double kecepatan);
 bool validasiInput(double jarak);
-void cariTempatWisata(ruteWisata rute[], int n, string nama);
-double estimasiWakti(double jarak, double kecepatan);
+void cariTempatWisata(ruteWisata rute[], int n, std::string nama);
 void rekomendasiTempatWisata(ruteWisata rute[], int n);
 void hitungJarakTerpendek(double graph[MAX_TEMPAT][MAX_TEMPAT], int n, int start, int end);
 void salesmanProblem(double graph[MAX_TEMPAT][MAX_TEMPAT], int n);
+
 
 
 #endif // RUTEWISATA_H_INCLUDED

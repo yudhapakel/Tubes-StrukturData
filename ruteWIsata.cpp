@@ -3,6 +3,7 @@
 #include <cstring>
 #include <cmath>
 #include <algorithm>
+#include <cfloat>
 #include <float.h>
 
 using namespace std;
@@ -23,7 +24,7 @@ double hitungWaktuPerjalanan(double totalJarak, double kecepatan)
 }
 
 bool validasiInput(double jarak)
-{
+{ 
     if (jarak >= 0)
     {
         return true;
@@ -38,7 +39,7 @@ void cariTempatWisata(ruteWisata rute[], int n, string nama)
     {
         if (rute[i].nama == nama)
         {
-            cout << "Nama Tempat Wisata: " << rute[i].nama << "di" << rute->lokasi[i] << endl;
+            cout << "Nama Tempat Wisata: " << rute[i].nama << " di " << rute[i].lokasi[0] << endl;
             ditemukan = true;
             break;
         }
@@ -109,7 +110,8 @@ void hitungJarakTerpendek(double graph[MAX_TEMPAT][MAX_TEMPAT], int n, int start
         }
     }
 
-    cout << "jarak terpendek: " << start << "ke" << end << "adalah" << jarak[end] << "km";
+    cout << "Jarak terpendek: " << start << " ke " << end << " adalah " << jarak[end] << " km" << endl;
+
     cout << "melalui jalur: ";
     int crawl = end;
     while (crawl != -1)
@@ -126,15 +128,16 @@ void salesmanProblem(double graph[MAX_TEMPAT][MAX_TEMPAT], int n)
     int perm[MAX_TEMPAT];
     for (int i = 0; i < n; i++)
     {
+        perm[i] = i;
         double minCost = DBL_MAX;
         int bestPath[MAX_TEMPAT];
 
         do
         {
             double currentCost = 0;
-            for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
             {
-                currentCost += graph[perm[i]][perm[i + 1]];
+                currentCost += graph[perm[j]][perm[j + 1]];
             }
             currentCost += graph[perm[n - 1]][perm[0]];
             if (currentCost < minCost)
