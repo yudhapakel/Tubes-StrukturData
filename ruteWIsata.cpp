@@ -135,7 +135,7 @@ void salesmanProblem(double graph[MAX_TEMPAT][MAX_TEMPAT], int n)
         do
         {
             double currentCost = 0;
-            for (int j = 0; j < n; j++)
+            for (int j = 0; j < n; j++) 
             {
                 currentCost += graph[perm[j]][perm[j + 1]];
             }
