@@ -85,7 +85,7 @@ int main() {
             break;
         }
         case 7: { // Traveling Salesman Problem (TSP)
-            cout << "\nMenghitung rute terbaik untuk Traveling Salesman Problem...\n";
+            cout << "\nMenghitung rute Optimal...\n";
             salesmanProblem(graph, jumlahTempatWisata);
             break;
         }

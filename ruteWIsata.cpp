@@ -39,16 +39,19 @@ void cariTempatWisata(ruteWisata rute[], int n, string nama)
     {
         if (rute[i].nama == nama)
         {
-            cout << "Nama Tempat Wisata: " << rute[i].nama << " di " << rute[i].lokasi[0] << endl;
+            cout << "Nama Tempat Wisata: " << rute[i].nama << endl;
+            cout << "Lokasi: " << rute[i].lokasi[0] << endl; // Misal lokasi lebih detail
+            cout << "Jarak: " << rute[i].jarak << " km" << endl; // Tambahkan jarak
             ditemukan = true;
             break;
         }
     }
     if (!ditemukan)
     {
-        cout << "Nama Tempat Wisata tidak ditemukan" << endl;
+        cout << "Nama Tempat Wisata \"" << nama << "\" tidak ditemukan." << endl; // Lebih spesifik
     }
 }
+
 
 double estimasiWakti(double jarak, double kecepatan)
 {
@@ -110,44 +113,56 @@ void hitungJarakTerpendek(double graph[MAX_TEMPAT][MAX_TEMPAT], int n, int start
         }
     }
 
-    cout << "Jarak terpendek: " << start << " ke " << end << " adalah " << jarak[end] << " km" << endl;
-
-    cout << "melalui jalur: ";
+    cout << "Jarak terpendek antara tempat " << start << " dan " << end << " adalah " << jarak[end] << " km." << endl;
+    cout << "Jalur yang dilalui: ";
     int crawl = end;
     while (crawl != -1)
     {
-        cout << crawl << (crawl == start ? "" : "<-");
+        cout << crawl << (crawl == start ? "" : " <- ");
         crawl = prev[crawl];
     }
     cout << endl;
-    // test
 }
+
 
 void salesmanProblem(double graph[MAX_TEMPAT][MAX_TEMPAT], int n)
 {
     int perm[MAX_TEMPAT];
+    double minCost = DBL_MAX;
+    int bestPath[MAX_TEMPAT];
+
+    // Coba semua kemungkinan jalur
     for (int i = 0; i < n; i++)
     {
         perm[i] = i;
-        double minCost = DBL_MAX;
-        int bestPath[MAX_TEMPAT];
-
-        do
-        {
-            double currentCost = 0;
-            for (int j = 0; j < n; j++) 
-            {
-                currentCost += graph[perm[j]][perm[j + 1]];
-            }
-            currentCost += graph[perm[n - 1]][perm[0]];
-            if (currentCost < minCost)
-            {
-                minCost = currentCost;
-                for (int i = 0; i < n; i++)
-                {
-                    bestPath[i] = perm[i];
-                }
-            }
-        } while (next_permutation(perm, perm + n));
     }
+
+    do
+    {
+        double currentCost = 0;
+        // Hitung biaya total untuk jalur ini
+        for (int j = 0; j < n - 1; j++) 
+        {
+            currentCost += graph[perm[j]][perm[j + 1]];
+        }
+        // Kembali ke titik awal
+        currentCost += graph[perm[n - 1]][perm[0]];
+
+        if (currentCost < minCost)
+        {
+            minCost = currentCost;
+            for (int i = 0; i < n; i++)
+            {
+                bestPath[i] = perm[i];
+            }
+        }
+    } while (next_permutation(perm, perm + n));
+
+    // Menampilkan jalur optimal
+    cout << "Jalur terbaik dengan biaya total terendah adalah: ";
+    for (int i = 0; i < n; i++)
+    {
+        cout << bestPath[i] << (i == n - 1 ? "" : " -> ");
+    }
+    cout << "\nTotal biaya: " << minCost << " km" << endl;
 }

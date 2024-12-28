@@ -12,11 +12,12 @@ using namespace std;
 const int MAX_TEMPAT = 100;
 
 
-struct ruteWisata{
-    string nama;
-    string lokasi;
-    double jarak;
+struct ruteWisata {
+    string nama;          
+    string lokasi;     
+    double jarak;         
 };
+
 
 
 double hitungJarakTotal(ruteWisata rute[], int n);
