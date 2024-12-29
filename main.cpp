@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ruteWisata.h" // Include header file
+#include "ruteWisata.h" 
 using namespace std;
 
 void tampilkanMenu() {
@@ -18,10 +18,10 @@ void tampilkanMenu() {
 int main() {
     // Data tempat wisata
     ruteWisata wisata[MAX_TEMPAT] = {
-        {"A", "Lokasi 1", 0},
-        {"B", "Lokasi 2", 10},
-        {"C", "Lokasi 3", 15},
-        {"D", "Lokasi 4", 20}
+        {"Bandung", "Lembang", 0},
+        {"Garut", "Papandayan", 10},
+        {"Cianjur", "Kebun raya cibodas", 15},
+        {"Cimahi", "Alam wisata cimahai", 20}
     };
     int jumlahTempatWisata = 4;
 
