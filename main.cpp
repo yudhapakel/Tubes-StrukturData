@@ -18,10 +18,10 @@ void tampilkanMenu() {
 int main() {
     // Data tempat wisata
     ruteWisata wisata[MAX_TEMPAT] = {
-        {"Bandung", "Lembang", 0},
-        {"Garut", "Papandayan", 10},
-        {"Cianjur", "Kebun raya cibodas", 15},
-        {"Cimahi", "Alam wisata cimahai", 20}
+        {"Lembang", "Bandung", 0},
+        {"Papandayan", "Garut", 10},
+        {"Kebun Raya Cibodas", "Cianjur", 15},
+        {"Alam Wisata Cimahi", "Cimahi", 20}
     };
     int jumlahTempatWisata = 4;
 
@@ -47,11 +47,11 @@ int main() {
             break;
         }
         case 2: { // Validasi Input Tempat Wisata
-            string nama;
-            cout << "Masukkan nama tempat wisata untuk validasi: ";
-            cin >> nama;
-            cariTempatWisata(wisata, jumlahTempatWisata, nama);
-            break;
+              cout << "Validasi input jarak:  ";
+              double jarak;
+              cin >> jarak;
+              cout << (validasiInput(jarak) ? "Valid" : "Tidak valid") << endl;
+              break;
         }
         case 3: { // Hitung Jarak Terpendek
             int start, end;
@@ -68,26 +68,35 @@ int main() {
             break;
         }
         case 5: { // Estimasi Waktu Perjalanan
-            double kecepatan;
-            cout << "Masukkan kecepatan rata-rata (km/jam): ";
-            cin >> kecepatan;
-            if (!validasiInput(kecepatan)) {
-                cout << "Kecepatan tidak valid.\n";
+            // double kecepatan;
+            // cout << "Masukkan kecepatan rata-rata (km/jam): ";
+            // cin >> kecepatan;
+            // if (!validasiInput(kecepatan)) {
+            //     cout << "Kecepatan tidak valid.\n";
+            //     break;
+            // }
+            // double totalJarak = hitungJarakTotal(wisata, jumlahTempatWisata);
+            // double waktu = hitungWaktuPerjalanan(totalJarak, kecepatan);
+            // cout << "Estimasi waktu perjalanan: " << waktu << " jam\n";
+            // break;
+            estimasiWaktuPerjalanan(wisata, jumlahTempatWisata, graph);
                 break;
-            }
-            double totalJarak = hitungJarakTotal(wisata, jumlahTempatWisata);
-            double waktu = hitungWaktuPerjalanan(totalJarak, kecepatan);
-            cout << "Estimasi waktu perjalanan: " << waktu << " jam\n";
-            break;
         }
         case 6: { // Rekomendasi Tempat Wisata
             rekomendasiTempatWisata(wisata, jumlahTempatWisata);
             break;
         }
         case 7: { // Traveling Salesman Problem (TSP)
-            cout << "\nMenghitung rute Optimal...\n";
-            salesmanProblem(graph, jumlahTempatWisata);
-            break;
+        cout << "\nMenghitung rute Optimal...\n";
+    
+         // Tambahkan biaya per kilometer
+         double biayaPerKm;
+        cout << "Masukkan biaya per kilometer: ";
+         cin >> biayaPerKm;
+
+         // Panggil fungsi salesmanProblem
+        salesmanProblem(graph, jumlahTempatWisata, biayaPerKm);
+        break;
         }
         case 8: {
             cout << "Terima kasih telah menggunakan program ini!\n";

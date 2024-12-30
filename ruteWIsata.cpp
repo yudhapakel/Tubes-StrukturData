@@ -52,10 +52,47 @@ void cariTempatWisata(ruteWisata rute[], int n, string nama)
     }
 }
 
+int cariIndeksTempatWisata(const ruteWisata wisata[], int jumlahTempatWisata, const string& nama) {
+    for (int i = 0; i < jumlahTempatWisata; i++) {
+        if (wisata[i].nama == nama) {
+            return i; // Mengembalikan indeks jika ditemukan
+        }
+    }
+    return -1; // Mengembalikan -1 jika nama tidak ditemukan
+}
 
-double estimasiWakti(double jarak, double kecepatan)
-{
-    return jarak / kecepatan;
+
+void estimasiWaktuPerjalanan(ruteWisata wisata[], int jumlahTempatWisata, double graph[MAX_TEMPAT][MAX_TEMPAT]) {
+    string asal, tujuan;
+    cout << "\n=== Estimasi Waktu Perjalanan ===\n";
+    cout << "Masukkan nama tempat asal: ";
+    cin.ignore(); // Membersihkan buffer
+    getline(cin, asal);
+    cout << "Masukkan nama tempat tujuan: ";
+    getline(cin, tujuan);
+
+    // Cari indeks asal dan tujuan
+    int indeksAsal = cariIndeksTempatWisata(wisata, jumlahTempatWisata, asal);
+    int indeksTujuan = cariIndeksTempatWisata(wisata, jumlahTempatWisata, tujuan);
+
+    if (indeksAsal == -1 || indeksTujuan == -1) {
+        cout << "Tempat wisata tidak ditemukan.\n";
+        return;
+    }
+
+    double jarak = graph[indeksAsal][indeksTujuan];
+    double kecepatan;
+
+    cout << "Masukkan kecepatan rata-rata (km/jam): ";
+    cin >> kecepatan;
+
+    if (kecepatan <= 0) {
+        cout << "Kecepatan tidak valid.\n";
+        return;
+    }
+
+    double waktu = jarak / kecepatan;
+    cout << "Estimasi waktu perjalanan dari " << asal << " ke " << tujuan << ": " << waktu << " jam.\n";
 }
 
 void rekomendasiTempatWisata(ruteWisata rute[], int n)
@@ -125,27 +162,28 @@ void hitungJarakTerpendek(double graph[MAX_TEMPAT][MAX_TEMPAT], int n, int start
 }
 
 
-void salesmanProblem(double graph[MAX_TEMPAT][MAX_TEMPAT], int n)
+void salesmanProblem(double graph[MAX_TEMPAT][MAX_TEMPAT], int n, double biayaPerKm)
 {
     int perm[MAX_TEMPAT];
     double minCost = DBL_MAX;
     int bestPath[MAX_TEMPAT];
 
-    // Coba semua kemungkinan jalur
+    
     for (int i = 0; i < n; i++)
     {
         perm[i] = i;
     }
 
+    
     do
     {
         double currentCost = 0;
-        // Hitung biaya total untuk jalur ini
-        for (int j = 0; j < n - 1; j++) 
+        
+        for (int j = 0; j < n - 1; j++)
         {
             currentCost += graph[perm[j]][perm[j + 1]];
         }
-        // Kembali ke titik awal
+
         currentCost += graph[perm[n - 1]][perm[0]];
 
         if (currentCost < minCost)
@@ -158,11 +196,15 @@ void salesmanProblem(double graph[MAX_TEMPAT][MAX_TEMPAT], int n)
         }
     } while (next_permutation(perm, perm + n));
 
+    // Konversi jarak menjadi biaya
+    double totalCost = minCost * biayaPerKm;
+
     // Menampilkan jalur optimal
     cout << "Jalur terbaik dengan biaya total terendah adalah: ";
     for (int i = 0; i < n; i++)
     {
         cout << bestPath[i] << (i == n - 1 ? "" : " -> ");
     }
-    cout << "\nTotal biaya: " << minCost << " km" << endl;
+    cout << "\nTotal biaya: Rp" << totalCost << endl;
 }
+

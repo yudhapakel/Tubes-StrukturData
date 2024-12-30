@@ -26,8 +26,9 @@ bool validasiInput(double jarak);
 void cariTempatWisata(ruteWisata rute[], int n, std::string nama);
 void rekomendasiTempatWisata(ruteWisata rute[], int n);
 void hitungJarakTerpendek(double graph[MAX_TEMPAT][MAX_TEMPAT], int n, int start, int end);
-void salesmanProblem(double graph[MAX_TEMPAT][MAX_TEMPAT], int n);
-
+void salesmanProblem(double graph[MAX_TEMPAT][MAX_TEMPAT], int n, double biayaPerKm);
+void estimasiWaktuPerjalanan(ruteWisata wisata[], int jumlahTempatWisata, double graph[MAX_TEMPAT][MAX_TEMPAT]);
+int cariIndeksTempatWisata(const ruteWisata wisata[], int jumlahTempatWisata, const string& nama);
 
 
 #endif // RUTEWISATA_H_INCLUDED
